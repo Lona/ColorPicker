@@ -42,7 +42,7 @@ public class DualAxisColorPicker: NSView {
     public var onChangeColorValue: ((Color) -> Void)? { didSet { update() } }
     public var colorValue: Color { didSet { update() } }
 
-    public var cornerRadius: CGFloat = 4 { didSet { update() } }
+    public var cornerRadius: CGFloat = 3 { didSet { update() } }
     public var outlineWidth: CGFloat = 1 { didSet { update() } }
     public var outlineColor = NSColor.black.withAlphaComponent(0.3) { didSet { update() } }
     public var shadowColor = NSColor.black { didSet { update() } }
@@ -145,10 +145,11 @@ public class DualAxisColorPicker: NSView {
         let ratio = ratioWithinBounds(of: point)
 
         let components = colorValue.hsv
-        let color = Color(
+        var color = Color(
             hue: components.hue,
             saturation: Float(ratio.x * 100),
             value: Float(ratio.y * 100))
+        color.alpha = colorValue.alpha
 
         onChangeColorValue?(color)
     }

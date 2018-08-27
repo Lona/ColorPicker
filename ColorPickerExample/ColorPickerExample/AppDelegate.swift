@@ -21,12 +21,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let dualAxisPicker = DualAxisColorPicker()
     let hueSliderPicker = SliderColorPicker()
+    let alphaSliderPicker = SliderColorPicker()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let contentView = NSView(frame: NSRect(x: 0, y: 0, width: 300, height: 600))
 
         contentView.addSubview(dualAxisPicker)
         contentView.addSubview(hueSliderPicker)
+        contentView.addSubview(alphaSliderPicker)
+
+        alphaSliderPicker.targetComponent = .alpha
 
         dualAxisPicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
         dualAxisPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin).isActive = true
@@ -36,9 +40,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         hueSliderPicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
         hueSliderPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin).isActive = true
-        hueSliderPicker.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
 
         hueSliderPicker.heightAnchor.constraint(equalToConstant: 10).isActive = true
+
+        hueSliderPicker.bottomAnchor.constraint(equalTo: alphaSliderPicker.topAnchor, constant: -4).isActive = true
+
+        alphaSliderPicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
+        alphaSliderPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin).isActive = true
+        alphaSliderPicker.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
+
+        alphaSliderPicker.heightAnchor.constraint(equalToConstant: 10).isActive = true
 
         window.contentView = contentView
 
@@ -48,6 +59,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         hueSliderPicker.onChangeColorValue = { color in
+            self.color = color
+            self.update()
+        }
+
+        alphaSliderPicker.onChangeColorValue = { color in
             self.color = color
             self.update()
         }
@@ -62,6 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func update() {
         dualAxisPicker.colorValue = color
         hueSliderPicker.colorValue = color
+        alphaSliderPicker.colorValue = color
     }
 }
 
