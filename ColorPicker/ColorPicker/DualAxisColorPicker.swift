@@ -53,6 +53,16 @@ public class DualAxisColorPicker: NSView {
 
     // MARK: Private
 
+    private let whiteGradient = NSGradient(colors: [
+        NSColor(red: 1, green: 1, blue: 1, alpha: 1),
+        NSColor(red: 1, green: 1, blue: 1, alpha: 0),
+        ])
+
+    private let blackGradient = NSGradient(colors: [
+        NSColor(red: 0, green: 0, blue: 0, alpha: 0),
+        NSColor(red: 0, green: 0, blue: 0, alpha: 1),
+        ])
+
     private lazy var trackingArea = NSTrackingArea(
         rect: self.frame,
         options: [.mouseEnteredAndExited, .activeAlways, .mouseMoved, .inVisibleRect],
@@ -83,19 +93,11 @@ public class DualAxisColorPicker: NSView {
 
         // Draw white gradient background (saturation)
 
-        let whiteGradient = NSGradient(colors: [
-            NSColor(red: 1, green: 1, blue: 1, alpha: 1),
-            NSColor(red: 1, green: 1, blue: 1, alpha: 0),
-            ])
         whiteGradient?.draw(in: dirtyRect, angle: 0)
 
         // Draw black gradient background (brightness)
 
-        let black = NSGradient(colors: [
-            NSColor(red: 0, green: 0, blue: 0, alpha: 0),
-            NSColor(red: 0, green: 0, blue: 0, alpha: 1),
-            ])
-        black?.draw(in: dirtyRect, angle: 270)
+        blackGradient?.draw(in: dirtyRect, angle: 270)
 
         // Setup shadow
 

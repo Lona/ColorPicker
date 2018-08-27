@@ -32,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         dualAxisPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin).isActive = true
         dualAxisPicker.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin).isActive = true
 
-        dualAxisPicker.bottomAnchor.constraint(equalTo: hueSliderPicker.topAnchor, constant: -margin).isActive = true
+        dualAxisPicker.bottomAnchor.constraint(equalTo: hueSliderPicker.topAnchor, constant: -4).isActive = true
 
         hueSliderPicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
         hueSliderPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin).isActive = true

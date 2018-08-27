@@ -53,6 +53,20 @@ public class SliderColorPicker: NSView {
 
     // MARK: Private
 
+    private let hueGradient = NSGradient(colors: [
+        NSColor(red: 0xFF / 0xFF, green: 0x00 / 0xFF, blue: 0x00 / 0xFF, alpha: 1),
+        NSColor(red: 0xFF / 0xFF, green: 0x00 / 0xFF, blue: 0x99 / 0xFF, alpha: 1),
+        NSColor(red: 0xCD / 0xFF, green: 0x00 / 0xFF, blue: 0xFF / 0xFF, alpha: 1),
+        NSColor(red: 0x32 / 0xFF, green: 0x00 / 0xFF, blue: 0xFF / 0xFF, alpha: 1),
+        NSColor(red: 0x00 / 0xFF, green: 0x66 / 0xFF, blue: 0xFF / 0xFF, alpha: 1),
+        NSColor(red: 0x00 / 0xFF, green: 0xFF / 0xFF, blue: 0xFD / 0xFF, alpha: 1),
+        NSColor(red: 0x00 / 0xFF, green: 0xFF / 0xFF, blue: 0x66 / 0xFF, alpha: 1),
+        NSColor(red: 0x35 / 0xFF, green: 0xFF / 0xFF, blue: 0x00 / 0x00, alpha: 1),
+        NSColor(red: 0xCD / 0xFF, green: 0xFF / 0xFF, blue: 0x00 / 0x00, alpha: 1),
+        NSColor(red: 0xFF / 0xFF, green: 0x99 / 0xFF, blue: 0x00 / 0x00, alpha: 1),
+        NSColor(red: 0xFF / 0xFF, green: 0x00 / 0xFF, blue: 0x00 / 0x00, alpha: 1),
+        ])
+
     private lazy var trackingArea = NSTrackingArea(
         rect: self.frame,
         options: [.mouseEnteredAndExited, .activeAlways, .mouseMoved, .inVisibleRect],
@@ -75,21 +89,8 @@ public class SliderColorPicker: NSView {
 
         NSBezierPath(roundedRect: dirtyRect, xRadius: cornerRadius, yRadius: cornerRadius).setClip()
 
-        // Draw white gradient background (saturation)
+        // Draw rainbow gradient background
 
-        let hueGradient = NSGradient(colors: [
-            NSColor(red: 0xFF / 0xFF, green: 0x00 / 0xFF, blue: 0x00 / 0xFF, alpha: 1),
-            NSColor(red: 0xFF / 0xFF, green: 0x00 / 0xFF, blue: 0x99 / 0xFF, alpha: 1),
-            NSColor(red: 0xCD / 0xFF, green: 0x00 / 0xFF, blue: 0xFF / 0xFF, alpha: 1),
-            NSColor(red: 0x32 / 0xFF, green: 0x00 / 0xFF, blue: 0xFF / 0xFF, alpha: 1),
-            NSColor(red: 0x00 / 0xFF, green: 0x66 / 0xFF, blue: 0xFF / 0xFF, alpha: 1),
-            NSColor(red: 0x00 / 0xFF, green: 0xFF / 0xFF, blue: 0xFD / 0xFF, alpha: 1),
-            NSColor(red: 0x00 / 0xFF, green: 0xFF / 0xFF, blue: 0x66 / 0xFF, alpha: 1),
-            NSColor(red: 0x35 / 0xFF, green: 0xFF / 0xFF, blue: 0x00 / 0x00, alpha: 1),
-            NSColor(red: 0xCD / 0xFF, green: 0xFF / 0xFF, blue: 0x00 / 0x00, alpha: 1),
-            NSColor(red: 0xFF / 0xFF, green: 0x99 / 0xFF, blue: 0x00 / 0x00, alpha: 1),
-            NSColor(red: 0xFF / 0xFF, green: 0x00 / 0xFF, blue: 0x00 / 0x00, alpha: 1),
-            ])
         hueGradient?.draw(in: dirtyRect, angle: 180)
 
         // Setup shadow
