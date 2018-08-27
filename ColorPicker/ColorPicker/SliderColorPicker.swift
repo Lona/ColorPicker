@@ -1,8 +1,8 @@
 //
-//  DualAxisColorPicker.swift
+//  SliderColorPicker.swift
 //  ColorPicker
 //
-//  Created by Devin Abbott on 8/26/18.
+//  Created by Devin Abbott on 8/27/18.
 //  Copyright © 2018 BitDisco, Inc. All rights reserved.
 //
 
@@ -10,13 +10,13 @@ import AppKit
 import Colors
 import Foundation
 
-// MARK: - DualAxisColorPicker
+// MARK: - SliderColorPicker
 
-public class DualAxisColorPicker: NSView {
+public class SliderColorPicker: NSView {
 
     // MARK: Lifecycle
 
-    public init(colorValue: Color = .black) {
+    public init(colorValue: Color = Color.black) {
         self.colorValue = colorValue
 
         super.init(frame: .zero)
@@ -41,7 +41,7 @@ public class DualAxisColorPicker: NSView {
 
     public var onChangeColorValue: ((Color) -> Void)? { didSet { update() } }
     public var colorValue: Color { didSet { update() } }
-
+    
     public var cornerRadius: CGFloat = 4 { didSet { update() } }
     public var outlineWidth: CGFloat = 1 { didSet { update() } }
     public var outlineColor = NSColor.black.withAlphaComponent(0.3) { didSet { update() } }
@@ -75,27 +75,22 @@ public class DualAxisColorPicker: NSView {
 
         NSBezierPath(roundedRect: dirtyRect, xRadius: cornerRadius, yRadius: cornerRadius).setClip()
 
-        // Draw current color as fill
-
-        NSColor(hue: CGFloat(colorValue.hsv.hue / 360), saturation: 1, brightness: 1, alpha: 1).set()
-
-        dirtyRect.fill()
-
         // Draw white gradient background (saturation)
 
-        let whiteGradient = NSGradient(colors: [
-            NSColor(red: 1, green: 1, blue: 1, alpha: 1),
-            NSColor(red: 1, green: 1, blue: 1, alpha: 0),
+        let hueGradient = NSGradient(colors: [
+            NSColor(red: 0xFF / 0xFF, green: 0x00 / 0xFF, blue: 0x00 / 0xFF, alpha: 1),
+            NSColor(red: 0xFF / 0xFF, green: 0x00 / 0xFF, blue: 0x99 / 0xFF, alpha: 1),
+            NSColor(red: 0xCD / 0xFF, green: 0x00 / 0xFF, blue: 0xFF / 0xFF, alpha: 1),
+            NSColor(red: 0x32 / 0xFF, green: 0x00 / 0xFF, blue: 0xFF / 0xFF, alpha: 1),
+            NSColor(red: 0x00 / 0xFF, green: 0x66 / 0xFF, blue: 0xFF / 0xFF, alpha: 1),
+            NSColor(red: 0x00 / 0xFF, green: 0xFF / 0xFF, blue: 0xFD / 0xFF, alpha: 1),
+            NSColor(red: 0x00 / 0xFF, green: 0xFF / 0xFF, blue: 0x66 / 0xFF, alpha: 1),
+            NSColor(red: 0x35 / 0xFF, green: 0xFF / 0xFF, blue: 0x00 / 0x00, alpha: 1),
+            NSColor(red: 0xCD / 0xFF, green: 0xFF / 0xFF, blue: 0x00 / 0x00, alpha: 1),
+            NSColor(red: 0xFF / 0xFF, green: 0x99 / 0xFF, blue: 0x00 / 0x00, alpha: 1),
+            NSColor(red: 0xFF / 0xFF, green: 0x00 / 0xFF, blue: 0x00 / 0x00, alpha: 1),
             ])
-        whiteGradient?.draw(in: dirtyRect, angle: 0)
-
-        // Draw black gradient background (brightness)
-
-        let black = NSGradient(colors: [
-            NSColor(red: 0, green: 0, blue: 0, alpha: 0),
-            NSColor(red: 0, green: 0, blue: 0, alpha: 1),
-            ])
-        black?.draw(in: dirtyRect, angle: 270)
+        hueGradient?.draw(in: dirtyRect, angle: 180)
 
         // Setup shadow
 
@@ -106,9 +101,8 @@ public class DualAxisColorPicker: NSView {
 
         // Draw cursor
 
-        let components = colorValue.hsv
-        let x = CGFloat(components.saturation / 100) * bounds.width
-        let y = CGFloat(components.value / 100) * bounds.height
+        let x = CGFloat(colorValue.hsv.hue / 360) * bounds.width
+        let y = bounds.height / 2
 
         cursorOutlineColor.setStroke()
 
@@ -144,9 +138,9 @@ public class DualAxisColorPicker: NSView {
 
         let components = colorValue.hsv
         let color = Color(
-            hue: components.hue,
-            saturation: Float(ratio.x * 100),
-            value: Float(ratio.y * 100))
+            hue: Float(ratio.x * 360),
+            saturation: components.saturation,
+            value: components.value)
 
         onChangeColorValue?(color)
     }
@@ -161,3 +155,4 @@ public class DualAxisColorPicker: NSView {
         triggerColorChange(with: point)
     }
 }
+
