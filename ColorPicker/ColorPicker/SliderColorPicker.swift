@@ -106,7 +106,7 @@ public class SliderColorPicker: NSView {
 
         NSBezierPath(roundedRect: dirtyRect, xRadius: cornerRadius, yRadius: cornerRadius).setClip()
 
-        // Draw rainbow gradient background
+        // Draw rainbow gradient or checkerboard background
 
         switch targetComponent {
         case .hue:

@@ -22,6 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let dualAxisPicker = DualAxisColorPicker()
     let hueSliderPicker = SliderColorPicker()
     let alphaSliderPicker = SliderColorPicker()
+    let swatchColorPicker = SwatchColorPicker()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let contentView = NSView(frame: NSRect(x: 0, y: 0, width: 300, height: 600))
@@ -29,6 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         contentView.addSubview(dualAxisPicker)
         contentView.addSubview(hueSliderPicker)
         contentView.addSubview(alphaSliderPicker)
+        contentView.addSubview(swatchColorPicker)
 
         alphaSliderPicker.targetComponent = .alpha
 
@@ -39,17 +41,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         dualAxisPicker.bottomAnchor.constraint(equalTo: hueSliderPicker.topAnchor, constant: -4).isActive = true
 
         hueSliderPicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
-        hueSliderPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin).isActive = true
+        hueSliderPicker.trailingAnchor.constraint(equalTo: swatchColorPicker.leadingAnchor, constant: -5).isActive = true
 
         hueSliderPicker.heightAnchor.constraint(equalToConstant: 10).isActive = true
 
         hueSliderPicker.bottomAnchor.constraint(equalTo: alphaSliderPicker.topAnchor, constant: -4).isActive = true
 
         alphaSliderPicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
-        alphaSliderPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin).isActive = true
+        alphaSliderPicker.trailingAnchor.constraint(equalTo: swatchColorPicker.leadingAnchor, constant: -5).isActive = true
         alphaSliderPicker.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
 
         alphaSliderPicker.heightAnchor.constraint(equalToConstant: 10).isActive = true
+
+        swatchColorPicker.topAnchor.constraint(equalTo: hueSliderPicker.topAnchor).isActive = true
+        swatchColorPicker.bottomAnchor.constraint(equalTo: alphaSliderPicker.bottomAnchor).isActive = true
+        swatchColorPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin).isActive = true
+
+        swatchColorPicker.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        swatchColorPicker.widthAnchor.constraint(equalToConstant: 24).isActive = true
 
         window.contentView = contentView
 
@@ -79,6 +88,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         dualAxisPicker.colorValue = color
         hueSliderPicker.colorValue = color
         alphaSliderPicker.colorValue = color
+        swatchColorPicker.colorValue = color
     }
 }
 
