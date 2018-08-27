@@ -12,7 +12,6 @@
 		6B9E8D622132FF030061057A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9E8D612132FF030061057A /* AppDelegate.swift */; };
 		6B9E8D642132FF040061057A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9E8D632132FF040061057A /* Assets.xcassets */; };
 		6B9E8D672132FF040061057A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B9E8D652132FF040061057A /* MainMenu.xib */; };
-		6B9E8D7221336FBA0061057A /* CSSColorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9E8D7121336FBA0061057A /* CSSColorParser.swift */; };
 		6B9E8DB5213470570061057A /* Colors.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6B9E8DA3213468790061057A /* Colors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -37,7 +36,6 @@
 		6B9E8D662132FF040061057A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6B9E8D682132FF040061057A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B9E8D692132FF040061057A /* ColorPickerExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ColorPickerExample.entitlements; sourceTree = "<group>"; };
-		6B9E8D7121336FBA0061057A /* CSSColorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSSColorParser.swift; sourceTree = "<group>"; };
 		6B9E8D8F213456CF0061057A /* ColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9E8DA3213468790061057A /* Colors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Colors.framework; path = ../Carthage/Build/Mac/Colors.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,7 +76,6 @@
 				6B9E8D692132FF040061057A /* ColorPickerExample.entitlements */,
 				6B9E8D682132FF040061057A /* Info.plist */,
 				6B9E8D612132FF030061057A /* AppDelegate.swift */,
-				6B9E8D7121336FBA0061057A /* CSSColorParser.swift */,
 				6B9E8D632132FF040061057A /* Assets.xcassets */,
 				6B9E8D652132FF040061057A /* MainMenu.xib */,
 			);
@@ -156,7 +153,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B9E8D7221336FBA0061057A /* CSSColorParser.swift in Sources */,
 				6B9E8D622132FF030061057A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,14 +9,12 @@
 import Colors
 import Foundation
 
-extension NSColor {
-    var color: Color {
-        get {
-            return Color(
-                red: Float(redComponent),
-                green: Float(greenComponent),
-                blue: Float(blueComponent),
-                alpha: Float(alphaComponent))
-        }
+public extension Color {
+    init(_ color: NSColor) {
+        self.init(
+            red: Float(color.redComponent),
+            green: Float(color.greenComponent),
+            blue: Float(color.blueComponent),
+            alpha: Float(color.alphaComponent))
     }
 }
