@@ -52,8 +52,7 @@ public class ColorPicker: NSView {
         addSubview(swatchColorPicker)
 
         let handleChangeColorValue: (Color) -> Void = { colorValue in
-            self.colorValue = colorValue
-            self.update()
+            self.onChangeColorValue?(colorValue)
         }
 
         dualAxisPicker.onChangeColorValue = handleChangeColorValue

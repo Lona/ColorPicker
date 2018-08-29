@@ -15,10 +15,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
 
-    var color = Color.orange
+    var color = Color(red: 0.1, green: 0.5, blue: 1, alpha: 0.5)
 
-    let colorPicker = ColorPicker()
-    let contentView = NSView(frame: NSRect(x: 0, y: 0, width: 300, height: 340))
+    let colorWellPicker = ColorWellPicker()
+    let contentView = NSView(frame: NSRect(x: 0, y: 0, width: 100, height: 40))
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         setUpViews()
@@ -30,9 +30,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func setUpViews() {
-        contentView.addSubview(colorPicker)
+        contentView.addSubview(colorWellPicker)
 
-        colorPicker.onChangeColorValue = { colorValue in
+        colorWellPicker.onChangeColorValue = { colorValue in
             self.color = colorValue
             self.update()
         }
@@ -40,12 +40,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func setUpConstraints() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        colorPicker.translatesAutoresizingMaskIntoConstraints = false
+        colorWellPicker.translatesAutoresizingMaskIntoConstraints = false
 
-        colorPicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        colorPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        colorPicker.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        colorPicker.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        colorWellPicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        colorWellPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        colorWellPicker.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        colorWellPicker.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -53,7 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func update() {
-        colorPicker.colorValue = color
+        colorWellPicker.colorValue = color
     }
 }
 
