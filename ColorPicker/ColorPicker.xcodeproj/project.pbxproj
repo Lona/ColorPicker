@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B5161282137188B00714555 /* ColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5161272137188B00714555 /* ColorWell.swift */; };
 		6B5886632134A4EA00CCA69F /* SwatchColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5886622134A4EA00CCA69F /* SwatchColorPicker.swift */; };
 		6B5886652134AAA400CCA69F /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5886642134AAA400CCA69F /* ColorPicker.swift */; };
 		6B9E8D83213456610061057A /* ColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B9E8D81213456610061057A /* ColorPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B5161272137188B00714555 /* ColorWell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWell.swift; sourceTree = "<group>"; };
 		6B5886622134A4EA00CCA69F /* SwatchColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwatchColorPicker.swift; sourceTree = "<group>"; };
 		6B5886642134AAA400CCA69F /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		6B9E8D7E213456610061057A /* ColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +66,7 @@
 				6B9E8D82213456610061057A /* Info.plist */,
 				6B5886642134AAA400CCA69F /* ColorPicker.swift */,
 				6B9E8DB221346E920061057A /* Colors+NSColor.swift */,
+				6B5161272137188B00714555 /* ColorWell.swift */,
 				6B9E8D972134570D0061057A /* DualAxisColorPicker.swift */,
 				6B9E8D9921345B060061057A /* SliderColorPicker.swift */,
 				6B5886622134A4EA00CCA69F /* SwatchColorPicker.swift */,
@@ -161,6 +164,7 @@
 				6B9E8DB321346E920061057A /* Colors+NSColor.swift in Sources */,
 				6B5886632134A4EA00CCA69F /* SwatchColorPicker.swift in Sources */,
 				6B5886652134AAA400CCA69F /* ColorPicker.swift in Sources */,
+				6B5161282137188B00714555 /* ColorWell.swift in Sources */,
 				6B9E8D9A21345B060061057A /* SliderColorPicker.swift in Sources */,
 				6B9E8D982134570D0061057A /* DualAxisColorPicker.swift in Sources */,
 			);

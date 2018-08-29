@@ -40,10 +40,7 @@ public class SwatchColorPicker: NSView {
     public var outlineColor = NSColor.black.withAlphaComponent(0.3) { didSet { update() } }
     public var shadowColor = NSColor.black { didSet { update() } }
     public var shadowRadius: CGFloat = 2 { didSet { update() } }
-    public var cursorSize: CGFloat = 7 { didSet { update() } }
-    public var cursorOutlineWidth: CGFloat = 1.5 { didSet { update() } }
-    public var cursorOutlineColor = NSColor.white { didSet { update() } }
-
+    
     // MARK: Private
 
     private let cellAlignmentOptions: AlignmentOptions = [.alignMinXNearest, .alignMinYNearest, .alignMaxXNearest, .alignMaxYNearest]
