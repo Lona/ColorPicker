@@ -122,7 +122,11 @@ public class SliderColorPicker: NSView {
 
             let components = colorValue.hsv
             let saturationGradient = NSGradient(colors: [
-                NSColor(red: 0, green: 0, blue: 0, alpha: 0),
+                NSColor(
+                    hue: CGFloat(components.hue / 360),
+                    saturation: CGFloat(components.saturation / 100),
+                    brightness: CGFloat(components.value / 100),
+                    alpha: 0),
                 NSColor(
                     hue: CGFloat(components.hue / 360),
                     saturation: CGFloat(components.saturation / 100),
