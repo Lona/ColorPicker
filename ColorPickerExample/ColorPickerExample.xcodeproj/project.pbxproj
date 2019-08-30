@@ -7,15 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B02E8F22318BF50004F4CDB /* ControlledComponents.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = 6B02E8F02318BF50004F4CDB /* ControlledComponents.framework.dSYM */; };
+		6B02E8F32318BF50004F4CDB /* Colors.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = 6B02E8F12318BF50004F4CDB /* Colors.framework.dSYM */; };
+		6B02E8F42318BF55004F4CDB /* Colors.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6B02E8F12318BF50004F4CDB /* Colors.framework.dSYM */; };
+		6B02E8F52318BF56004F4CDB /* ControlledComponents.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6B02E8F02318BF50004F4CDB /* ControlledComponents.framework.dSYM */; };
 		6B5886602134711F00CCA69F /* ColorPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9E8D8F213456CF0061057A /* ColorPicker.framework */; };
 		6B5886612134711F00CCA69F /* ColorPicker.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6B9E8D8F213456CF0061057A /* ColorPicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B9E8D622132FF030061057A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9E8D612132FF030061057A /* AppDelegate.swift */; };
 		6B9E8D642132FF040061057A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9E8D632132FF040061057A /* Assets.xcassets */; };
 		6B9E8D672132FF040061057A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B9E8D652132FF040061057A /* MainMenu.xib */; };
 		6B9E8DB5213470570061057A /* Colors.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6B9E8DA3213468790061057A /* Colors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6BB04C7C2318799700007111 /* ControlledComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB04C7B2318799700007111 /* ControlledComponents.framework */; };
+		6BB04C7E2318799A00007111 /* ControlledComponents.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6BB04C7B2318799700007111 /* ControlledComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		6B02E8EF2318BF29004F4CDB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				6B02E8F42318BF55004F4CDB /* Colors.framework.dSYM in CopyFiles */,
+				6B02E8F52318BF56004F4CDB /* ControlledComponents.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6B9E8DB42134704F0061057A /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -24,12 +41,15 @@
 			files = (
 				6B5886612134711F00CCA69F /* ColorPicker.framework in CopyFiles */,
 				6B9E8DB5213470570061057A /* Colors.framework in CopyFiles */,
+				6BB04C7E2318799A00007111 /* ControlledComponents.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6B02E8F02318BF50004F4CDB /* ControlledComponents.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ControlledComponents.framework.dSYM; path = ../Carthage/Build/Mac/ControlledComponents.framework.dSYM; sourceTree = "<group>"; };
+		6B02E8F12318BF50004F4CDB /* Colors.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Colors.framework.dSYM; path = ../Carthage/Build/Mac/Colors.framework.dSYM; sourceTree = "<group>"; };
 		6B9E8D5E2132FF030061057A /* ColorPickerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorPickerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9E8D612132FF030061057A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B9E8D632132FF040061057A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +58,7 @@
 		6B9E8D692132FF040061057A /* ColorPickerExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ColorPickerExample.entitlements; sourceTree = "<group>"; };
 		6B9E8D8F213456CF0061057A /* ColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9E8DA3213468790061057A /* Colors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Colors.framework; path = ../Carthage/Build/Mac/Colors.framework; sourceTree = "<group>"; };
+		6BB04C7B2318799700007111 /* ControlledComponents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ControlledComponents.framework; path = ../Carthage/Build/Mac/ControlledComponents.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BB04C7C2318799700007111 /* ControlledComponents.framework in Frameworks */,
 				6B5886602134711F00CCA69F /* ColorPicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,6 +79,9 @@
 			children = (
 				6B9E8D602132FF030061057A /* ColorPickerExample */,
 				6B9E8D5F2132FF030061057A /* Products */,
+				6B02E8F12318BF50004F4CDB /* Colors.framework.dSYM */,
+				6B02E8F02318BF50004F4CDB /* ControlledComponents.framework.dSYM */,
+				6BB04C7B2318799700007111 /* ControlledComponents.framework */,
 				6B9E8DA3213468790061057A /* Colors.framework */,
 				6B9E8D8F213456CF0061057A /* ColorPicker.framework */,
 			);
@@ -93,6 +118,7 @@
 				6B9E8D5B2132FF030061057A /* Frameworks */,
 				6B9E8D5C2132FF030061057A /* Resources */,
 				6B9E8DB42134704F0061057A /* CopyFiles */,
+				6B02E8EF2318BF29004F4CDB /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -115,6 +141,11 @@
 				TargetAttributes = {
 					6B9E8D5D2132FF030061057A = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -143,6 +174,8 @@
 			files = (
 				6B9E8D642132FF040061057A /* Assets.xcassets in Resources */,
 				6B9E8D672132FF040061057A /* MainMenu.xib in Resources */,
+				6B02E8F32318BF50004F4CDB /* Colors.framework.dSYM in Resources */,
+				6B02E8F22318BF50004F4CDB /* ControlledComponents.framework.dSYM in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,10 +321,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ColorPickerExample/ColorPickerExample.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = K5VK634QMQ;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/Mac";
 				INFOPLIST_FILE = ColorPickerExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -300,6 +332,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.devinabbott.ColorPickerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -308,10 +341,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ColorPickerExample/ColorPickerExample.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = K5VK634QMQ;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/Mac";
 				INFOPLIST_FILE = ColorPickerExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,6 +352,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.devinabbott.ColorPickerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

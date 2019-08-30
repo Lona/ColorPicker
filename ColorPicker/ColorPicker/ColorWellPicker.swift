@@ -81,8 +81,7 @@ public class ColorWellPicker: NSView {
         colorPicker.topAnchor.constraint(equalTo: colorPickerContainer.topAnchor, constant: 8).isActive = true
         colorPicker.bottomAnchor.constraint(equalTo: colorPickerContainer.bottomAnchor, constant: -8).isActive = true
 
-        colorPickerContainer.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        colorPickerContainer.heightAnchor.constraint(equalToConstant: 240).isActive = true
+        colorPickerContainer.heightAnchor.constraint(equalToConstant: 264).isActive = true
     }
 
     private func update() {

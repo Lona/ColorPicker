@@ -42,6 +42,8 @@ public class ColorPicker: NSView {
     private let hueSliderPicker = SliderColorPicker()
     private let alphaSliderPicker = SliderColorPicker()
     private let swatchColorPicker = SwatchColorPicker()
+    private let hexInputColorPicker = InputFieldColorPicker(inputType: .hex)
+    private let componentInputColorPicker = InputFieldColorPicker(inputType: .rgba)
 
     private func setUpViews() {
         alphaSliderPicker.targetComponent = .alpha
@@ -50,14 +52,18 @@ public class ColorPicker: NSView {
         addSubview(hueSliderPicker)
         addSubview(alphaSliderPicker)
         addSubview(swatchColorPicker)
+        addSubview(componentInputColorPicker)
+        addSubview(hexInputColorPicker)
 
-        let handleChangeColorValue: (Color) -> Void = { colorValue in
-            self.onChangeColorValue?(colorValue)
+        let handleChangeColorValue: (Color) -> Void = { [weak self] colorValue in
+            self?.onChangeColorValue?(colorValue)
         }
 
         dualAxisPicker.onChangeColorValue = handleChangeColorValue
         hueSliderPicker.onChangeColorValue = handleChangeColorValue
         alphaSliderPicker.onChangeColorValue = handleChangeColorValue
+        componentInputColorPicker.onChangeColorValue = handleChangeColorValue
+        hexInputColorPicker.onChangeColorValue = handleChangeColorValue
     }
 
     private func setUpConstraints() {
@@ -78,7 +84,8 @@ public class ColorPicker: NSView {
 
         alphaSliderPicker.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         alphaSliderPicker.trailingAnchor.constraint(equalTo: swatchColorPicker.leadingAnchor, constant: -5).isActive = true
-        alphaSliderPicker.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
+        alphaSliderPicker.bottomAnchor.constraint(equalTo: componentInputColorPicker.topAnchor, constant: -5).isActive = true
 
         alphaSliderPicker.heightAnchor.constraint(equalToConstant: 10).isActive = true
 
@@ -88,6 +95,20 @@ public class ColorPicker: NSView {
 
         swatchColorPicker.heightAnchor.constraint(equalToConstant: 24).isActive = true
         swatchColorPicker.widthAnchor.constraint(equalToConstant: 24).isActive = true
+
+        hexInputColorPicker.topAnchor.constraint(equalTo: componentInputColorPicker.topAnchor).isActive = true
+        hexInputColorPicker.bottomAnchor.constraint(equalTo: componentInputColorPicker.bottomAnchor).isActive = true
+        hexInputColorPicker.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+
+        let hexInputWidthConstraint = hexInputColorPicker.widthAnchor.constraint(equalTo: componentInputColorPicker.widthAnchor, multiplier: 0.5)
+        hexInputWidthConstraint.priority = .defaultHigh
+        hexInputWidthConstraint.isActive = true
+
+        componentInputColorPicker.leadingAnchor.constraint(equalTo: hexInputColorPicker.trailingAnchor, constant: 5).isActive = true
+
+        componentInputColorPicker.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        componentInputColorPicker.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        componentInputColorPicker.widthAnchor.constraint(greaterThanOrEqualToConstant: 140).isActive = true
     }
 
     private func update() {
@@ -95,6 +116,8 @@ public class ColorPicker: NSView {
         hueSliderPicker.colorValue = colorValue
         alphaSliderPicker.colorValue = colorValue
         swatchColorPicker.colorValue = colorValue
+        componentInputColorPicker.colorValue = colorValue
+        hexInputColorPicker.colorValue = colorValue
     }
 }
 
