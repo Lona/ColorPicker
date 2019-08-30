@@ -268,9 +268,7 @@ public class InputFieldColorPicker: NSView {
             ]
 
             zip(inputViews, components).forEach { view, component in
-                Swift.print("update", view.textValue, InputFieldColorPicker.formatter.string(from: NSNumber(value: component)) ?? "0")
                 view.textValue = InputFieldColorPicker.formatter.string(from: NSNumber(value: component)) ?? "0"
-                Swift.print("updated", view.textValue)
             }
         }
     }
