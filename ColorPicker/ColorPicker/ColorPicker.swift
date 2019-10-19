@@ -12,7 +12,7 @@ import Foundation
 
 // MARK: - ColorPicker
 
-public class ColorPicker: NSView {
+open class ColorPicker: NSView {
 
     // MARK: Lifecycle
 

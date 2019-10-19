@@ -11,46 +11,6 @@ import Colors
 import ControlledComponents
 import Foundation
 
-// MARK: - PaddedTextInput
-
-open class PaddedTextInput: TextInput {
-    override open class var cellClass: AnyClass? {
-        get { return PaddedTextInputCell.self }
-        set {}
-    }
-}
-
-open class PaddedTextInputCell: NSTextFieldCell {
-    public var inset = NSSize(width: -6, height: 0)
-
-    override open func drawingRect(forBounds rect: NSRect) -> NSRect {
-        return super.drawingRect(forBounds: rect).insetBy(dx: inset.width, dy: inset.height)
-    }
-}
-
-// MARK: - NumberInput
-
-open class PaddedNumberInput: PaddedTextInput {
-    override open func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
-        var changeBy: Float?
-
-        if commandSelector == #selector(moveUp(_:)) { changeBy = 1.0 }
-        if commandSelector == #selector(moveUpAndModifySelection(_:)) { changeBy = 10.0 }
-        if commandSelector == #selector(moveDown(_:)) { changeBy = -1.0 }
-        if commandSelector == #selector(moveDownAndModifySelection(_:)) { changeBy = -10.0 }
-
-        if let changeBy = changeBy, let number = InputFieldColorPicker.formatter.number(from: textValue)?.floatValue {
-            let newValue = number + changeBy
-            if let newTextValue = InputFieldColorPicker.formatter.string(from: NSNumber(value: newValue)) {
-                onChangeTextValue?(newTextValue)
-                return true
-            }
-        }
-
-        return super.control(control, textView: textView, doCommandBy: commandSelector)
-    }
-}
-
 // MARK: - InputFieldColorPicker
 
 public class InputFieldColorPicker: NSView {
@@ -82,12 +42,6 @@ public class InputFieldColorPicker: NSView {
     public var colorValue: Color { didSet { update() } }
     public var onChangeColorValue: ((Color) -> Void)? { didSet { update() } }
 
-    public var cornerRadius: CGFloat = 3 { didSet { update() } }
-    public var outlineWidth: CGFloat = 1 { didSet { update() } }
-    public var outlineColor = NSColor.black.withAlphaComponent(0.3) { didSet { update() } }
-    public var shadowColor = NSColor.black { didSet { update() } }
-    public var shadowRadius: CGFloat = 2 { didSet { update() } }
-
     // MARK: Private
 
     private var inputType: InputType
@@ -96,16 +50,9 @@ public class InputFieldColorPicker: NSView {
     private var labelViews: [NSTextField] = []
 
     private func setUpViews() {
-        func makeLabelView(string label: String) -> NSTextField {
-            let labelView = NSTextField(labelWithString: label)
-            labelView.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .mini), weight: .regular)
-            labelView.alphaValue = 0.7
-            return labelView
-        }
-
         switch inputType {
         case .hex:
-            let hexInputView = PaddedTextInput()
+            let hexInputView = PickerTextInput()
 
             hexInputView.onChangeTextValue = { [weak self] value in
                 let inputView = hexInputView
@@ -118,15 +65,15 @@ public class InputFieldColorPicker: NSView {
             }
 
             inputViews = [hexInputView]
-            labelViews = [makeLabelView(string: "HEX")]
+            labelViews = [PickerLabelView(labelWithString: "HEX")]
         case .hsla:
             inputViews = [PaddedTextInput(), PaddedTextInput(), PaddedTextInput(), PaddedTextInput()]
-            labelViews = ["H", "S", "L", "A"].map(makeLabelView)
+            labelViews = ["H", "S", "L", "A"].map { PickerLabelView(labelWithString: $0) }
         case .rgba:
-            let rInputView = PaddedNumberInput()
-            let gInputView = PaddedNumberInput()
-            let bInputView = PaddedNumberInput()
-            let aInputView = PaddedNumberInput()
+            let rInputView = PickerNumberInput()
+            let gInputView = PickerNumberInput()
+            let bInputView = PickerNumberInput()
+            let aInputView = PickerNumberInput()
 
             rInputView.onChangeTextValue = { [weak self] value in
                 let inputView = rInputView
@@ -205,14 +152,10 @@ public class InputFieldColorPicker: NSView {
             }
 
             inputViews = [rInputView, gInputView, bInputView, aInputView]
-            labelViews = ["R", "G", "B", "A"].map(makeLabelView)
+            labelViews = ["R", "G", "B", "A"].map { PickerLabelView(labelWithString: $0) }
         }
 
         for inputView in inputViews {
-            inputView.bezelStyle = .roundedBezel
-            inputView.controlSize = .small
-            inputView.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .small), weight: .regular)
-            inputView.delegate = inputView
             addSubview(inputView)
         }
 
@@ -233,6 +176,8 @@ public class InputFieldColorPicker: NSView {
             } else {
                 view.leadingAnchor.constraint(equalTo: inputViews[offset - 1].trailingAnchor, constant: 5).isActive = true
                 view.widthAnchor.constraint(equalTo: inputViews[offset - 1].widthAnchor).isActive = true
+
+                inputViews[offset - 1].nextKeyView = view
             }
 
             if view == inputViews.last {

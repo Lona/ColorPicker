@@ -20,6 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let colorWellPicker = ColorWellPicker()
     let contentView = NSView(frame: NSRect(x: 0, y: 0, width: 100, height: 40))
 
+    let shadowPicker = ShadowPicker()
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         setUpViews()
         setUpConstraints()
@@ -28,6 +30,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         window.contentView = contentView
     }
+
+//    func setUpViews() {
+//        contentView.addSubview(shadowPicker)
+//
+//        shadowPicker.onChangeShadowValue = { shadowValue in
+//            self.shadowPicker.shadowValue = shadowValue
+//        }
+//    }
+//
+//    func setUpConstraints() {
+//        contentView.translatesAutoresizingMaskIntoConstraints = false
+//        shadowPicker.translatesAutoresizingMaskIntoConstraints = false
+//
+//        shadowPicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+//        shadowPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+//        shadowPicker.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+//        shadowPicker.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+//    }
 
     func setUpViews() {
         contentView.addSubview(colorWellPicker)

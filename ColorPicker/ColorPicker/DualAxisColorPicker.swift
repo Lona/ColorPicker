@@ -154,13 +154,41 @@ public class DualAxisColorPicker: NSView {
         onChangeColorValue?(color)
     }
 
+    private var mouseDownColorValue: Color?
+
     public override func mouseDown(with event: NSEvent) {
         let point = convert(event.locationInWindow, from: nil)
+        mouseDownColorValue = colorValue
+
         triggerColorChange(with: point)
     }
 
     public override func mouseDragged(with event: NSEvent) {
-        let point = convert(event.locationInWindow, from: nil)
+        guard let mouseDownColorValue = mouseDownColorValue else { return }
+        var point = convert(event.locationInWindow, from: nil)
+
+        let isShiftEnabled = event.modifierFlags.contains(NSEvent.ModifierFlags.shift)
+
+        if isShiftEnabled {
+            let initialPoint = NSPoint(
+                x: CGFloat(mouseDownColorValue.hsv.saturation) / 100 * bounds.width,
+                y: CGFloat(mouseDownColorValue.hsv.value) / 100 * bounds.height
+            )
+
+            let dx = point.x - initialPoint.x
+            let dy = point.y - initialPoint.y
+            
+            if abs(dx) > abs(dy) {
+                point.y = initialPoint.y
+            } else {
+                point.x = initialPoint.x
+            }
+        }
+
         triggerColorChange(with: point)
+    }
+
+    public override func mouseUp(with event: NSEvent) {
+        mouseDownColorValue = nil
     }
 }
