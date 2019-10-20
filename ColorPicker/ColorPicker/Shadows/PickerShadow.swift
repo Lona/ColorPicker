@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct PickerShadow {
+public struct PickerShadow: Codable {
     public var x: Int
     public var y: Int
     public var blur: Int
