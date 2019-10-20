@@ -15,8 +15,23 @@ import WebKit
 
 fileprivate class BoxShadowView: NSView {
 
+    public enum Platform {
+        case iOS
+        case macOS
+
+        var scaleFactor: CGFloat {
+            switch self {
+            case .iOS:
+                return 2
+            case .macOS:
+                return 1
+            }
+        }
+    }
+
     public var boxPreviewSize: CGFloat = 60 { didSet { update() } }
     public var shadowValue: PickerShadow = .init() { didSet { update() } }
+    public var platform: Platform = .iOS { didSet { update() } }
 
     private func update() {
         needsDisplay = true
@@ -39,7 +54,7 @@ fileprivate class BoxShadowView: NSView {
 
         let boxPreviewShadow = NSShadow()
         boxPreviewShadow.shadowColor = NSColor.black
-        boxPreviewShadow.shadowBlurRadius = CGFloat(shadowValue.blur)
+        boxPreviewShadow.shadowBlurRadius = CGFloat(shadowValue.blur) * platform.scaleFactor
         boxPreviewShadow.shadowOffset = .init(width: shadowValue.x, height: -shadowValue.y)
 
         let boxPreviewRect = NSRect(
