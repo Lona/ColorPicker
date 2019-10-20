@@ -33,3 +33,9 @@ public struct PickerShadow: Codable {
         return clone
     }
 }
+
+extension PickerShadow {
+    public var boxShadow: String {
+        return "\(x)px \(y)px \(blur)px \(radius)px"
+    }
+}

@@ -179,7 +179,7 @@ public class BoxPreviewShadowPicker: NSView {
                 </style>
             </head>
             <body>
-                <div id="box" style="width: \(boxPreviewSize)px; height: \(boxPreviewSize)px;" />
+                <div id="box" style="width: \(boxPreviewSize)px; height: \(boxPreviewSize)px; box-shadow: \(shadowValue.boxShadow)" />
             </body>
         </html>
         """
@@ -227,7 +227,7 @@ public class BoxPreviewShadowPicker: NSView {
 
         let javaScript = """
             var element = document.getElementById("box")
-            element.style.boxShadow = "\(shadowValue.x)px \(shadowValue.y)px \(shadowValue.blur)px \(shadowValue.radius)px"
+            element.style.boxShadow = "\(shadowValue.boxShadow)"
         """
 
         webView.evaluateJavaScript(javaScript, completionHandler: nil)
