@@ -25,6 +25,7 @@
 		6BF4EF50235B738500548F61 /* BoxPreviewShadowPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4EF4F235B738500548F61 /* BoxPreviewShadowPicker.swift */; };
 		6BF4EF52235B744D00548F61 /* ShadowPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4EF51235B744D00548F61 /* ShadowPicker.swift */; };
 		6BF4EF54235BAB1C00548F61 /* NSImage+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4EF53235BAB1C00548F61 /* NSImage+Blur.swift */; };
+		6BF4EF56235BCB2900548F61 /* ControlledDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4EF55235BCB2900548F61 /* ControlledDropdown.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		6BF4EF4F235B738500548F61 /* BoxPreviewShadowPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxPreviewShadowPicker.swift; sourceTree = "<group>"; };
 		6BF4EF51235B744D00548F61 /* ShadowPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowPicker.swift; sourceTree = "<group>"; };
 		6BF4EF53235BAB1C00548F61 /* NSImage+Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Blur.swift"; sourceTree = "<group>"; };
+		6BF4EF55235BCB2900548F61 /* ControlledDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlledDropdown.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				6B9E8D9921345B060061057A /* SliderColorPicker.swift */,
 				6B5886622134A4EA00CCA69F /* SwatchColorPicker.swift */,
 				6BF4EF4C235B71A300548F61 /* Shadows */,
+				6BF4EF55235BCB2900548F61 /* ControlledDropdown.swift */,
 			);
 			path = ColorPicker;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				6B51612A21372BBF00714555 /* ColorWellPicker.swift in Sources */,
 				6B5886652134AAA400CCA69F /* ColorPicker.swift in Sources */,
 				6BF4EF54235BAB1C00548F61 /* NSImage+Blur.swift in Sources */,
+				6BF4EF56235BCB2900548F61 /* ControlledDropdown.swift in Sources */,
 				6B5161282137188B00714555 /* ColorWell.swift in Sources */,
 				6B9E8D9A21345B060061057A /* SliderColorPicker.swift in Sources */,
 				6BF4EF47235AA3B800548F61 /* PickerLabelView.swift in Sources */,

@@ -7,8 +7,62 @@
 //
 
 import AppKit
+import ControlledComponents
 import Foundation
 import WebKit
+
+// MARK: - BoxShadowView
+
+fileprivate class BoxShadowView: NSView {
+
+    public var boxPreviewSize: CGFloat = 60 { didSet { update() } }
+    public var shadowValue: PickerShadow = .init() { didSet { update() } }
+
+    private func update() {
+        needsDisplay = true
+    }
+
+    override public func draw(_ dirtyRect: NSRect) {
+        NSGraphicsContext.saveGraphicsState()
+
+        // Clip to rounded rect
+
+        NSBezierPath(rect: dirtyRect).setClip()
+
+        // Draw background color
+
+        NSColor.white.setFill()
+
+        dirtyRect.fill()
+
+        // Draw box preview
+
+        let boxPreviewShadow = NSShadow()
+        boxPreviewShadow.shadowColor = NSColor.black
+        boxPreviewShadow.shadowBlurRadius = CGFloat(shadowValue.blur)
+        boxPreviewShadow.shadowOffset = .init(width: shadowValue.x, height: -shadowValue.y)
+
+        let boxPreviewRect = NSRect(
+            x: bounds.midX - boxPreviewSize / 2,
+            y: bounds.midY - boxPreviewSize / 2,
+            width: boxPreviewSize,
+            height: boxPreviewSize)
+
+        let boxPreviewAlignedRect = backingAlignedRect(boxPreviewRect, options: .alignAllEdgesNearest)
+
+        // Fill box preview rect
+
+        boxPreviewShadow.set()
+
+        NSColor.white.setFill()
+
+        boxPreviewAlignedRect.fill()
+
+        // Draw outline
+
+        NSGraphicsContext.restoreGraphicsState()
+    }
+}
 
 // MARK: - BoxPreviewShadowPicker
 
@@ -16,8 +70,9 @@ public class BoxPreviewShadowPicker: NSView {
 
     // MARK: Lifecycle
 
-    public init(shadowValue: PickerShadow = .init()) {
+    public init(shadowValue: PickerShadow = .init(), emulationMode: ShadowPicker.EmulationMode = .appKit) {
         self.shadowValue = shadowValue
+        self.emulationMode = emulationMode
 
         super.init(frame: .zero)
 
@@ -41,6 +96,7 @@ public class BoxPreviewShadowPicker: NSView {
 
     public var onChangeShadowValue: ((PickerShadow) -> Void)? { didSet { update() } }
     public var shadowValue: PickerShadow { didSet { update() } }
+    public var emulationMode: ShadowPicker.EmulationMode { didSet { update() } }
 
     public var cornerRadius: CGFloat = 3 { didSet { update() } }
     public var outlineWidth: CGFloat = 1 { didSet { update() } }
@@ -56,10 +112,33 @@ public class BoxPreviewShadowPicker: NSView {
         options: [.activeAlways, .mouseMoved, .inVisibleRect],
         owner: self)
 
-    private var webView = WKWebView()
+    private let webView = WKWebView()
+    private let boxShadowView = BoxShadowView()
+    private let emulationDropdown = ControlledDropdown()
+    private let emulationDropdownBackground = NSBox()
+    private let webKitLabelView = PickerLabelView(labelWithString: "Web")
+    private let appKitLabelView = PickerLabelView(labelWithString: "iOS")
 
     private func setUpViews() {
         addSubview(webView)
+        addSubview(boxShadowView)
+        addSubview(webKitLabelView)
+        addSubview(appKitLabelView)
+        addSubview(emulationDropdownBackground)
+        addSubview(emulationDropdown)
+
+//        emulationDropdown.textColor = NSColor.black
+        emulationDropdown.controlSize = .small
+        emulationDropdown.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .small))
+        emulationDropdown.values = ShadowPicker.EmulationMode.allCases.map { $0.title }
+        emulationDropdown.onChangeIndex = { [unowned self] index in
+            self.emulationMode = .init(index: index)
+        }
+
+        emulationDropdownBackground.boxType = .custom
+        emulationDropdownBackground.borderType = .noBorder
+        emulationDropdownBackground.fillColor = NSColor.windowBackgroundColor.withAlphaComponent(0.8)
+        emulationDropdownBackground.cornerRadius = 4
 
         let html = """
         <html>
@@ -78,7 +157,7 @@ public class BoxPreviewShadowPicker: NSView {
                 </style>
             </head>
             <body>
-                <div id="box" style="width: 60px; height: 60px;" />
+                <div id="box" style="width: \(boxPreviewSize)px; height: \(boxPreviewSize)px;" />
             </body>
         </html>
         """
@@ -86,14 +165,39 @@ public class BoxPreviewShadowPicker: NSView {
         webView.loadHTMLString(html, baseURL: nil)
     }
 
+    var webViewTrailingAnchor = NSLayoutConstraint()
+    var boxShadowViewLeadingAnchor = NSLayoutConstraint()
+
     private func setUpConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
         webView.translatesAutoresizingMaskIntoConstraints = false
+        boxShadowView.translatesAutoresizingMaskIntoConstraints = false
+        webKitLabelView.translatesAutoresizingMaskIntoConstraints = false
+        appKitLabelView.translatesAutoresizingMaskIntoConstraints = false
+        emulationDropdown.translatesAutoresizingMaskIntoConstraints = false
+        emulationDropdownBackground.translatesAutoresizingMaskIntoConstraints = false
 
         webView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 1).isActive = true
-        webView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -1).isActive = true
         webView.topAnchor.constraint(equalTo: topAnchor, constant: 1).isActive = true
         webView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1).isActive = true
+
+        webKitLabelView.bottomAnchor.constraint(equalTo: webView.bottomAnchor, constant: -8).isActive = true
+        webKitLabelView.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
+
+        boxShadowView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -1).isActive = true
+        boxShadowView.topAnchor.constraint(equalTo: topAnchor, constant: 1).isActive = true
+        boxShadowView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1).isActive = true
+
+        appKitLabelView.bottomAnchor.constraint(equalTo: boxShadowView.bottomAnchor, constant: -8).isActive = true
+        appKitLabelView.centerXAnchor.constraint(equalTo: boxShadowView.centerXAnchor).isActive = true
+
+        emulationDropdown.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
+        emulationDropdown.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
+
+        emulationDropdownBackground.topAnchor.constraint(equalTo: emulationDropdown.topAnchor, constant: 3).isActive = true
+        emulationDropdownBackground.bottomAnchor.constraint(equalTo: emulationDropdown.bottomAnchor, constant: -3).isActive = true
+        emulationDropdownBackground.leadingAnchor.constraint(equalTo: emulationDropdown.leadingAnchor, constant: 5).isActive = true
+        emulationDropdownBackground.trailingAnchor.constraint(equalTo: emulationDropdown.trailingAnchor, constant: 1).isActive = true
     }
 
     private func update() {
@@ -105,6 +209,50 @@ public class BoxPreviewShadowPicker: NSView {
         """
 
         webView.evaluateJavaScript(javaScript, completionHandler: nil)
+
+        boxShadowView.boxPreviewSize = boxPreviewSize
+        boxShadowView.shadowValue = shadowValue
+
+        emulationDropdown.selectedIndex = emulationMode.index
+
+        NSLayoutConstraint.deactivate([
+            webViewTrailingAnchor,
+            boxShadowViewLeadingAnchor
+        ])
+
+        let labelColor = NSColor.black.withAlphaComponent(0.7)
+        webKitLabelView.textColor = labelColor
+        appKitLabelView.textColor = labelColor
+
+        switch emulationMode {
+        case .appKit:
+            boxShadowViewLeadingAnchor = boxShadowView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 1)
+            boxShadowViewLeadingAnchor.isActive = true
+
+            webView.isHidden = true
+            boxShadowView.isHidden = false
+            webKitLabelView.isHidden = true
+            appKitLabelView.isHidden = true
+        case .webKit:
+            webViewTrailingAnchor = webView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -1)
+            webViewTrailingAnchor.isActive = true
+
+            webView.isHidden = false
+            boxShadowView.isHidden = true
+            webKitLabelView.isHidden = true
+            appKitLabelView.isHidden = true
+        case .split:
+            webViewTrailingAnchor = webView.trailingAnchor.constraint(equalTo: boxShadowView.leadingAnchor, constant: -2)
+            webViewTrailingAnchor.isActive = true
+
+            boxShadowViewLeadingAnchor = webView.widthAnchor.constraint(equalTo: boxShadowView.widthAnchor)
+            boxShadowViewLeadingAnchor.isActive = true
+
+            webView.isHidden = false
+            boxShadowView.isHidden = false
+            webKitLabelView.isHidden = false
+            appKitLabelView.isHidden = false
+        }
     }
 
     override public func draw(_ dirtyRect: NSRect) {
@@ -119,6 +267,17 @@ public class BoxPreviewShadowPicker: NSView {
         NSColor.white.setFill()
 
         dirtyRect.fill()
+
+        // Draw divider
+
+        switch emulationMode {
+        case .appKit, .webKit:
+            break
+        case .split:
+            NSColor.black.withAlphaComponent(0.03).setFill()
+
+            NSRect(x: webView.frame.maxX, y: 1, width: boxShadowView.frame.minX, height: bounds.height - 1).fill()
+        }
 
         // Draw outline
 
@@ -146,7 +305,7 @@ public class BoxPreviewShadowPicker: NSView {
     public override func hitTest(_ point: NSPoint) -> NSView? {
         let result = super.hitTest(point)
 
-        if result == webView {
+        if result == webView || result == boxShadowView {
             return self
         }
 

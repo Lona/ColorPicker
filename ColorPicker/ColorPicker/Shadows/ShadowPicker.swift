@@ -14,9 +14,26 @@ import Foundation
 
 open class ShadowPicker: NSView {
 
-    public enum EmulationMode {
+    public enum EmulationMode: CaseIterable {
         case appKit
         case webKit
+        case split
+
+        public init(index: Int) {
+            self = EmulationMode.allCases[index]
+        }
+
+        public var index: Int {
+            return EmulationMode.allCases.firstIndex(of: self)!
+        }
+
+        public var title: String {
+            switch self {
+            case .appKit: return "iOS renderer"
+            case .webKit: return "Web renderer"
+            case .split: return "Split renderer"
+            }
+        }
     }
 
     // MARK: Lifecycle
