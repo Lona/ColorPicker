@@ -15,9 +15,9 @@ import Foundation
 open class ShadowPicker: NSView {
 
     public enum EmulationMode: CaseIterable {
+        case split
         case appKit
         case webKit
-        case split
 
         public init(index: Int) {
             self = EmulationMode.allCases[index]

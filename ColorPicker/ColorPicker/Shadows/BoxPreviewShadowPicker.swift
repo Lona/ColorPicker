@@ -68,9 +68,16 @@ fileprivate class BoxShadowView: NSView {
 
 public class BoxPreviewShadowPicker: NSView {
 
+    public static let emulationKey = "picker.shadow.emulation"
+    public static var defaultEmulationMode: ShadowPicker.EmulationMode {
+        return .init(index: UserDefaults.standard.integer(forKey: emulationKey))
+    }
+
     // MARK: Lifecycle
 
-    public init(shadowValue: PickerShadow = .init(), emulationMode: ShadowPicker.EmulationMode = .appKit) {
+    public init(
+        shadowValue: PickerShadow = .init(),
+        emulationMode: ShadowPicker.EmulationMode = BoxPreviewShadowPicker.defaultEmulationMode) {
         self.shadowValue = shadowValue
         self.emulationMode = emulationMode
 
@@ -127,11 +134,11 @@ public class BoxPreviewShadowPicker: NSView {
         addSubview(emulationDropdownBackground)
         addSubview(emulationDropdown)
 
-//        emulationDropdown.textColor = NSColor.black
         emulationDropdown.controlSize = .small
         emulationDropdown.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .small))
         emulationDropdown.values = ShadowPicker.EmulationMode.allCases.map { $0.title }
         emulationDropdown.onChangeIndex = { [unowned self] index in
+            UserDefaults.standard.set(index, forKey: BoxPreviewShadowPicker.emulationKey)
             self.emulationMode = .init(index: index)
         }
 

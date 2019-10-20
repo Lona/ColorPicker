@@ -97,7 +97,7 @@ public class InputFieldShadowPicker: NSView {
         }
 
         inputViews = [xInputView, yInputView, blurInputView, radiusInputView]
-        labelViews = ["X", "Y", "Blur", "Radius"].map { PickerLabelView(labelWithString: $0) }
+        labelViews = ["X", "Y", "Blur", "Radius (web)"].map { PickerLabelView(labelWithString: $0) }
 
         for inputView in inputViews {
             addSubview(inputView)
